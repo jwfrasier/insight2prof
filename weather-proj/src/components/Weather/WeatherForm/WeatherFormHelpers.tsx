@@ -1,7 +1,7 @@
 import { GeocodingResponse } from "./types/Geocode/GeocodeTypes";
 
-const BASE_URL = "http://localhost:3033/get_weather";
-const GEOCODE_URL =
+const BASE_URL: string = "http://localhost:3033/get_weather";
+const GEOCODE_URL: string =
   "https://geocoding.geo.census.gov/geocoder/locations/address?";
 import { AddressForm } from "./types/AddressForm/AddressFormTypes";
 
@@ -51,7 +51,5 @@ export const findWeatherData = async (
     body: JSON.stringify(body),
   });
   const json: GeocodingResponse = await response.json();
-  console.log(json);
-
-  return response;
+  return json;
 };

@@ -1,15 +1,17 @@
-import { ReactElement, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import WeatherBarButton from "./WeatherBarButton";
 import WeatherBarInput from "./WeatherBarInput";
 
-// const url = "https://geocoding.geo.census.gov/geocoder/locations/address?street=2509+Tupelo+Terrace&city=%20Tallahassee&state=FL&zip=32303&benchmark=Public_AR_Census2020&format=json"
 type AddressForm = {
   streetName: string;
   streetNumber: string;
   zipcode: string;
 };
 
-const WeatherBar = (): JSX.Element => {
+const WeatherForm = (): JSX.Element => {
+  const queryClient = useQueryClient();
+  // const getWeatherQuery = useQuery("latlong");
   const [addressForm, setAddressForm] = useState<AddressForm>({
     streetName: "",
     streetNumber: "",
@@ -43,4 +45,4 @@ const WeatherBar = (): JSX.Element => {
   );
 };
 
-export default WeatherBar;
+export default WeatherForm;

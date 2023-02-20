@@ -14,7 +14,7 @@ app.post("/get_weather", async (req, res) => {
   });
   if (response.status === 200) {
     const json = await response.json();
-    res.status(200).send(json);
+    res.status(200).send(json.result.addressMatches);
   } else {
     res.status(response.status).send(response);
   }

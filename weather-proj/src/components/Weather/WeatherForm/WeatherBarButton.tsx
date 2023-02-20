@@ -1,5 +1,6 @@
 import { findWeatherData } from "./WeatherFormHelpers";
 import { AddressForm } from "./types/AddressForm/AddressFormTypes";
+import { GeocodingResponse } from "./types/Geocode/GeocodeTypes";
 
 interface WeatherBarButtonProps {
   addressForm: AddressForm;
@@ -13,7 +14,9 @@ const WeatherBarButton = ({
   return (
     <>
       <button
-        onClick={() => findWeatherData(addressForm, setAddressForm)}
+        onClick={(): Promise<GeocodingResponse> =>
+          findWeatherData(addressForm, setAddressForm)
+        }
         type="button"
         name="submit"
       >
