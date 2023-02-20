@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import "./App.css";
-import { WeatherBar } from "./components/WeatherBar";
+import { WeatherBar } from "./components/Weather/WeatherForm";
 
 const App = (): ReactElement => {
   return (
