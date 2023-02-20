@@ -1,20 +1,19 @@
 import { findWeatherData } from "./WeatherFormHelpers";
-
-type AddressForm = {
-  streetName: string;
-  streetNumber: string;
-  zipcode: string;
-};
+import { AddressForm } from "./types/AddressForm/AddressFormTypes";
 
 interface WeatherBarButtonProps {
   addressForm: AddressForm;
+  setAddressForm: (params?: any) => void;
 }
 
-const WeatherBarButton = ({ addressForm }: WeatherBarButtonProps) => {
+const WeatherBarButton = ({
+  addressForm,
+  setAddressForm,
+}: WeatherBarButtonProps): JSX.Element => {
   return (
     <>
       <button
-        onClick={() => findWeatherData(addressForm)}
+        onClick={() => findWeatherData(addressForm, setAddressForm)}
         type="button"
         name="submit"
       >

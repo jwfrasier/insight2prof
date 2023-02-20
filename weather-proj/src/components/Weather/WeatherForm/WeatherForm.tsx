@@ -9,7 +9,7 @@ type AddressForm = {
   zipcode: string;
 };
 
-const WeatherBar = (): ReactElement => {
+const WeatherBar = (): JSX.Element => {
   const [addressForm, setAddressForm] = useState<AddressForm>({
     streetName: "",
     streetNumber: "",
@@ -35,7 +35,10 @@ const WeatherBar = (): ReactElement => {
         name={"zipcode"}
         placeHolder={"Enter Your Zipcode"}
       />
-      <WeatherBarButton addressForm={addressForm} />
+      <WeatherBarButton
+        addressForm={addressForm}
+        setAddressForm={setAddressForm}
+      />
     </div>
   );
 };

@@ -16,15 +16,13 @@ const WeatherBarInput = ({
   addressForm,
   name,
   placeHolder,
-}: WeatherBarInputProps) => {
-  const addressObj = addressForm;
-  const field = name;
-  const value = addressObj[field as keyof typeof addressObj];
+}: WeatherBarInputProps): JSX.Element => {
+  const value = addressForm[name as keyof typeof addressForm];
   return (
     <>
       <input
         value={value}
-        onChange={(e) =>
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setAddressForm({ ...addressForm, [name]: e.target.value })
         }
         type="text"
