@@ -9,9 +9,12 @@ const PORT = 3033;
 
 app.post("/get_weather", async (req, res) => {
   const { url } = req.body;
+  console.log("🚀 ~ file: index.js:13 ~ app.post ~ url", url);
+
   const response = await fetch(url, {
     method: "get",
   });
+  console.log("🚀 ~ file: index.js:18 ~ app.post ~ response", response);
   if (response.status === 200) {
     const json = await response.json();
     res.status(200).send(json.result.addressMatches);

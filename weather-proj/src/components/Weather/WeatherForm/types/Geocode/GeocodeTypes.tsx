@@ -49,3 +49,35 @@ interface Result {
 export interface GeocodingResponse {
   result: Result;
 }
+
+type AddressComponents = {
+  city: string;
+  fromAddress: string;
+  preDirection: string;
+  preQualifier: string;
+  preType: string;
+  state: string;
+  streetName: string;
+  suffixDirection: string;
+  suffixQualifier: string;
+  suffixType: string;
+  toAddress: string;
+  zip: string;
+};
+
+type Coordinates = {
+  x: number;
+  y: number;
+};
+
+type TigerLine = {
+  side: string;
+  tigerLineId: string;
+};
+
+export type Data = {
+  addressComponents: AddressComponents;
+  coordinates: Coordinates;
+  matchedAddress: string;
+  tigerLine: TigerLine;
+};

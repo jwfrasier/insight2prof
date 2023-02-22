@@ -1,5 +1,5 @@
 import WeatherBarButton from "./WeatherBarButton";
 import WeatherBarInput from "./WeatherBarInput";
-import WeatherBar from "./WeatherForm";
+import WeatherForm from "./WeatherForm";
 
-export { WeatherBar, WeatherBarButton, WeatherBarInput };
+export { WeatherForm, WeatherBarButton, WeatherBarInput };

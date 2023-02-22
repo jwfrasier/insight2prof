@@ -50,6 +50,7 @@ export const findWeatherData = async (
     referrerPolicy: "no-referrer",
     body: JSON.stringify(body),
   });
-  const json: GeocodingResponse = await response.json();
+  const json = await response.json();
+  console.log("🚀 ~ file: WeatherFormHelpers.tsx:55 ~ json", json);
   return json;
 };

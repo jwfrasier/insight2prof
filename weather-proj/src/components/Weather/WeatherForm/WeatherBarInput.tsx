@@ -1,8 +1,4 @@
-type AddressForm = {
-  streetName: string;
-  streetNumber: string;
-  zipcode: string;
-};
+import { AddressForm } from "./types/AddressForm/AddressFormTypes";
 
 interface WeatherBarInputProps {
   setAddressForm: (params: any) => void;
