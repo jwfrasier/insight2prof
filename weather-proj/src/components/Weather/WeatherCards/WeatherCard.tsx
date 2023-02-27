@@ -8,7 +8,7 @@ import { findWeatherData } from "../WeatherForm/WeatherFormHelpers";
 //   addressForm?: AddressForm;
 //   setAddressForm?: (params: any) => void;
 // }
-const WeatherCard = ({ data }): JSX.Element => {
+const WeatherCard = ({ data = {} }): JSX.Element => {
   return (
     <div>
       {/* {data?.map((stuff: Data) => (
