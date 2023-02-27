@@ -2,21 +2,28 @@ import { Query, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import WeatherCard from "../WeatherCards/WeatherCard";
 import { getWeatherData } from "./queries";
+import {
+  Forecast,
+  WeatherLatLong,
+} from "./types/WeatherForecast/WeatherForecast";
 import WeatherBarButton from "./WeatherBarButton";
 import WeatherBarInput from "./WeatherBarInput";
-import { findWeatherData } from "./WeatherFormHelpers";
+import {
+  findWeatherData,
+  getWeatherForecast,
+  getWeatherForecastUrl,
+} from "./WeatherFormHelpers";
 
 export type AddressForm = {
   streetName: string;
   streetNumber: string;
   zipcode: string;
 };
-
 const WeatherForm = (): JSX.Element => {
   const [addressForm, setAddressForm] = useState<AddressForm>({
-    streetName: "",
-    streetNumber: "",
-    zipcode: "",
+    streetName: "mystic stone drive",
+    streetNumber: "20915",
+    zipcode: "77375",
   });
 
   const { data, refetch } = useQuery(
@@ -24,13 +31,20 @@ const WeatherForm = (): JSX.Element => {
     () => findWeatherData(addressForm, setAddressForm),
     { enabled: false }
   );
+  // const latLong = data[0]?.coordinates;
+  // console.log({ latLong });
+  const { data: forecastUrl } = useQuery(
+    ["forecastUrl", data],
+    () => getWeatherForecastUrl(data[0]?.coordinates),
+    { enabled: !!data }
+  );
 
-  // const { data: forecast } = useQuery(
-  //   ["forecast"],
-  //   () => findWeatherData(addressForm, setAddressForm),
-  //   { enabled: false }
-  // );
-
+  const { data: forecast } = useQuery(
+    ["forecast", forecastUrl],
+    () => getWeatherForecast(forecastUrl),
+    { enabled: !!forecastUrl }
+  );
+  console.log({ forecast });
   return (
     <div>
       <WeatherBarInput
@@ -56,7 +70,11 @@ const WeatherForm = (): JSX.Element => {
         addressForm={addressForm}
         setAddressForm={setAddressForm}
       />
-      <WeatherCard data={data} />
+      <div className="temperature_container">
+        {forecast?.map((period: Forecast): JSX.Element => {
+          return <WeatherCard {...period} />;
+        })}
+      </div>
     </div>
   );
 };

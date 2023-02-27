@@ -4,7 +4,10 @@ const BASE_URL: string = "http://localhost:3033/get_weather";
 const GEOCODE_URL: string =
   "https://geocoding.geo.census.gov/geocoder/locations/address?";
 import { AddressForm } from "./types/AddressForm/AddressFormTypes";
-import { WeatherLatLong } from "./types/WeatherForecast/WeatherForecast";
+import {
+  Forecast,
+  WeatherLatLong,
+} from "./types/WeatherForecast/WeatherForecast";
 
 const formatWeatherReqURL = (url: string, formData: AddressForm): string => {
   const { streetName, streetNumber, zipcode } = formData;
@@ -56,7 +59,18 @@ export const findWeatherData = async (
   return json;
 };
 
-// export const getWeatherForcast = async ({ lat, long }: WeatherLatLong):Promise<> => {
+export const getWeatherForecastUrl = async (latLong: WeatherLatLong) => {
+  const BASE_WEATHER_URL = `https://api.weather.gov/points/${latLong.y},${latLong.x}`;
+  const getWeatherForecastUrl = await fetch(BASE_WEATHER_URL);
+  const json = await getWeatherForecastUrl.json();
+  console.log(json);
+  return json?.properties?.forecast;
+};
 
-//     const getWeather
-// };
+export const getWeatherForecast = async (url: string): Promise<Forecast[]> => {
+  const getWeather = await fetch(url);
+  const json = await getWeather.json();
+  console.log(json);
+  // const formattedPeriods = formatWeatherData();
+  return json?.properties?.periods;
+};
