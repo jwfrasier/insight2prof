@@ -29,7 +29,7 @@ interface Forecast {
 
 const WeatherCard = (period: Forecast): JSX.Element => {
   return (
-    <div className="bg-white p-4 bg-opacity-80 rounded-3xl flex justify-between space-x-12 shadow-md items-center w-px-300">
+    <div className="bg-white p-3 bg-opacity-80 rounded-3xl flex justify-between space-x-12 shadow-md items-center w-px-400">
       <div>
         <img className="rounded-lg" src={period.icon} alt="" />
       </div>
