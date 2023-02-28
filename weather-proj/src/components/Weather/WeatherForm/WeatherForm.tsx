@@ -1,11 +1,7 @@
-import { Query, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import WeatherCard from "../WeatherCards/WeatherCard";
-import { getWeatherData } from "./queries";
-import {
-  Forecast,
-  WeatherLatLong,
-} from "./types/WeatherForecast/WeatherForecast";
+import { Forecast } from "./types/WeatherForecast/WeatherForecast";
 import WeatherBarButton from "./WeatherBarButton";
 import WeatherBarInput from "./WeatherBarInput";
 import {
@@ -31,8 +27,7 @@ const WeatherForm = (): JSX.Element => {
     () => findWeatherData(addressForm, setAddressForm),
     { enabled: false }
   );
-  // const latLong = data[0]?.coordinates;
-  // console.log({ latLong });
+
   const { data: forecastUrl } = useQuery(
     ["forecastUrl", data],
     () => getWeatherForecastUrl(data[0]?.coordinates),
@@ -44,33 +39,37 @@ const WeatherForm = (): JSX.Element => {
     () => getWeatherForecast(forecastUrl),
     { enabled: !!forecastUrl }
   );
-  console.log({ forecast });
+
   return (
     <div>
-      <WeatherBarInput
-        addressForm={addressForm}
-        setAddressForm={setAddressForm}
-        name={"streetNumber"}
-        placeHolder={"Enter Your Street Number"}
-      />
-      <WeatherBarInput
-        addressForm={addressForm}
-        setAddressForm={setAddressForm}
-        name={"streetName"}
-        placeHolder={"Enter Your Street Name"}
-      />
-      <WeatherBarInput
-        addressForm={addressForm}
-        setAddressForm={setAddressForm}
-        name={"zipcode"}
-        placeHolder={"Enter Your Zipcode"}
-      />
-      <WeatherBarButton
-        points={refetch}
-        addressForm={addressForm}
-        setAddressForm={setAddressForm}
-      />
-      <div className="temperature_container">
+      <div>
+        <WeatherBarInput
+          addressForm={addressForm}
+          setAddressForm={setAddressForm}
+          name={"streetNumber"}
+          placeHolder={"Enter Your Street Number"}
+        />
+        <WeatherBarInput
+          addressForm={addressForm}
+          setAddressForm={setAddressForm}
+          name={"streetName"}
+          placeHolder={"Enter Your Street Name"}
+        />
+        <WeatherBarInput
+          addressForm={addressForm}
+          setAddressForm={setAddressForm}
+          name={"zipcode"}
+          placeHolder={"Enter Your Zipcode"}
+        />
+      </div>
+      <div className="m-2">
+        <WeatherBarButton
+          points={refetch}
+          addressForm={addressForm}
+          setAddressForm={setAddressForm}
+        />
+      </div>
+      <div className=" h-px-660 grid grid-rows-4 grid-cols-4 gap-4 ">
         {forecast?.map((period: Forecast): JSX.Element => {
           return <WeatherCard {...period} />;
         })}

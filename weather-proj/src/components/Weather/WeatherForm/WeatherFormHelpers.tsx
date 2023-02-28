@@ -1,5 +1,3 @@
-import { GeocodingResponse } from "./types/Geocode/GeocodeTypes";
-
 const BASE_URL: string = "http://localhost:3033/get_weather";
 const GEOCODE_URL: string =
   "https://geocoding.geo.census.gov/geocoder/locations/address?";
@@ -55,22 +53,37 @@ export const findWeatherData = async (
     body: JSON.stringify(body),
   });
   const json = await response.json();
-  console.log("🚀 ~ file: WeatherFormHelpers.tsx:55 ~ json", json);
+
   return json;
 };
 
 export const getWeatherForecastUrl = async (latLong: WeatherLatLong) => {
   const BASE_WEATHER_URL = `https://api.weather.gov/points/${latLong.y},${latLong.x}`;
-  const getWeatherForecastUrl = await fetch(BASE_WEATHER_URL);
-  const json = await getWeatherForecastUrl.json();
-  console.log(json);
+  const weatherURL = await fetch(BASE_WEATHER_URL);
+  const json = await weatherURL.json();
   return json?.properties?.forecast;
 };
 
 export const getWeatherForecast = async (url: string): Promise<Forecast[]> => {
   const getWeather = await fetch(url);
   const json = await getWeather.json();
-  console.log(json);
-  // const formattedPeriods = formatWeatherData();
-  return json?.properties?.periods;
+  const formattedPeriods = combineObjects(json?.properties?.periods);
+  return formattedPeriods;
+};
+const combineObjects = (data: Forecast[]): Forecast[] => {
+  const result: Forecast[] = [];
+
+  for (let i = 0; i < data.length; i += 2) {
+    if (i + 1 < data.length) {
+      const combinedObject: Forecast = {
+        ...data[i],
+        low: data[i + 1].temperature,
+      };
+      result.push(combinedObject);
+    } else {
+      result.push(data[i]);
+    }
+  }
+
+  return result;
 };
