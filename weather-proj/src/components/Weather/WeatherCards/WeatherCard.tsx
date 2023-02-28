@@ -1,20 +1,45 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { AddressForm } from "../WeatherForm/types/AddressForm/AddressFormTypes";
-import { Data } from "../WeatherForm/types/Geocode/GeocodeTypes";
-import { Forecast } from "../WeatherForm/types/WeatherForecast/WeatherForecast";
-import { findWeatherData } from "../WeatherForm/WeatherFormHelpers";
-// interface WeatherCardProps {
-//   data: Data[];
-//   addressForm?: AddressForm;
-//   setAddressForm?: (params: any) => void;
-// }
+interface Forecast {
+  detailedForecast: string;
+  dewpoint: {
+    unitCode: string;
+    value: number;
+  };
+  endTime: string;
+  icon: string;
+  isDaytime: boolean;
+  name: string;
+  number: number;
+  probabilityOfPrecipitation: {
+    unitCode: string;
+    value: number | null;
+  };
+  relativeHumidity: {
+    unitCode: string;
+    value: number;
+  };
+  shortForecast: string;
+  startTime: string;
+  temperature: number;
+  low?: number;
+  temperatureTrend: any;
+  temperatureUnit: string;
+  windDirection: string;
+  windSpeed: string;
+}
+
 const WeatherCard = (period: Forecast): JSX.Element => {
   return (
-    <div className="temperature_card">
-      {/* <img src={period.icon} alt="" /> */}
-      <h3>{period.name}</h3>
-      <h4>{period.temperature}</h4>
+    <div className="bg-white p-4 bg-opacity-80 rounded-3xl flex justify-between space-x-12 shadow-md items-center w-px-300">
+      <div>
+        <img className="rounded-lg" src={period.icon} alt="" />
+      </div>
+      <div>
+        <p className="text-3xl font-bold text-right text-gray-900">
+          {period.temperature}/{period.low} {period.temperatureUnit}°
+        </p>
+
+        <p className="text-gray-500 text-sm">{period.name}</p>
+      </div>
     </div>
   );
 };
