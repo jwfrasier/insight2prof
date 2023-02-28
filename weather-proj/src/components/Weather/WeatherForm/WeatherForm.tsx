@@ -23,13 +23,13 @@ const WeatherForm = (): JSX.Element => {
   });
 
   const { data, refetch } = useQuery(
-    ["grid"],
+    ["weather"],
     () => findWeatherData(addressForm, setAddressForm),
     { enabled: false }
   );
 
   const { data: forecastUrl } = useQuery(
-    ["forecastUrl", data],
+    ["forecastUrl"],
     () => getWeatherForecastUrl(data[0]?.coordinates),
     { enabled: !!data }
   );
