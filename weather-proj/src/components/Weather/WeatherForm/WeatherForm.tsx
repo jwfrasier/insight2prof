@@ -25,7 +25,7 @@ const WeatherForm = (): JSX.Element => {
   const { data, refetch } = useQuery(
     ["weather"],
     () => findWeatherData(addressForm, setAddressForm),
-    { enabled: false }
+    { enabled: false, retry: false }
   );
 
   const { data: forecastUrl } = useQuery(
