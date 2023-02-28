@@ -71,7 +71,7 @@ const WeatherForm = (): JSX.Element => {
       </div>
       <div className=" h-px-660 grid grid-rows-4 grid-cols-4 gap-4 ">
         {forecast?.map((period: Forecast): JSX.Element => {
-          return <WeatherCard {...period} />;
+          return <WeatherCard key={period.name} {...period} />;
         })}
       </div>
     </div>
