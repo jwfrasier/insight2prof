@@ -9,8 +9,8 @@ import {
 
 const formatWeatherReqURL = (url: string, formData: AddressForm): string => {
   const { streetName, streetNumber, zipcode } = formData;
-  const city: string = ""; // leave empty
-  const state: string = ""; // leave empty
+  const city: string = "";
+  const state: string = "";
   const formattedSt = streetName.split(" ").join("+");
 
   const benchmark: string = "Public_AR_Census2020";
@@ -27,6 +27,15 @@ export const findWeatherData = async (
   addressForm: AddressForm,
   setAddressForm: (params: any) => void
 ) => {
+  if (addressForm.streetName === "") {
+    throw new Error("Please enter a Street Name");
+  }
+  if (addressForm.zipcode === "") {
+    throw new Error("Please enter a zipcode");
+  }
+  if (addressForm.streetNumber === "") {
+    throw new Error("Please enter a Street Number");
+  }
   const initialState: AddressForm = {
     streetName: "",
     streetNumber: "",
@@ -40,15 +49,14 @@ export const findWeatherData = async (
   };
   setAddressForm(initialState);
   const response: Response = await fetch(BASE_URL, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
+    redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(body),
   });
