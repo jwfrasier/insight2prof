@@ -1,6 +1,4 @@
-import { findWeatherData } from "./WeatherFormHelpers";
 import { AddressForm } from "./types/AddressForm/AddressFormTypes";
-import { GeocodingResponse } from "./types/Geocode/GeocodeTypes";
 
 interface WeatherBarButtonProps {
   addressForm: AddressForm;
@@ -8,11 +6,7 @@ interface WeatherBarButtonProps {
   points: (params?: any) => void;
 }
 
-const WeatherBarButton = ({
-  addressForm,
-  setAddressForm,
-  points,
-}: WeatherBarButtonProps): JSX.Element => {
+const WeatherBarButton = ({ points }: WeatherBarButtonProps): JSX.Element => {
   return (
     <>
       <button onClick={points} type="button" name="submit">
