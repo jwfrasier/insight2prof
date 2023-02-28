@@ -17,9 +17,9 @@ export type AddressForm = {
 };
 const WeatherForm = (): JSX.Element => {
   const [addressForm, setAddressForm] = useState<AddressForm>({
-    streetName: "mystic stone drive",
-    streetNumber: "20915",
-    zipcode: "77375",
+    streetName: "",
+    streetNumber: "",
+    zipcode: "",
   });
 
   const { data, refetch } = useQuery(
