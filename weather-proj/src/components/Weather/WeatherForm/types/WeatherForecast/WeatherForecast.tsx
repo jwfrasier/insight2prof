@@ -25,6 +25,7 @@ export interface Forecast {
   shortForecast: string;
   startTime: string;
   temperature: number;
+  low?: number;
   temperatureTrend: any;
   temperatureUnit: string;
   windDirection: string;
