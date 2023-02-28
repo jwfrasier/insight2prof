@@ -21,7 +21,8 @@ const WeatherBarInput = ({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setAddressForm({ ...addressForm, [name]: e.target.value })
         }
-        type="text"
+        className="m-1"
+        type={name === "streetNumber" || name === "zipcode" ? "number" : "text"}
         name={name}
         placeholder={placeHolder}
       />
